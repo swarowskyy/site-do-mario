@@ -1,0 +1,490 @@
+
+        /* --- Paleta de Cores Autêntica do Super Mario Bros --- */
+        :root {
+            --mario-red: #E52521;       /* Vermelho do Mario */
+            --mario-overall: #48B8C7;   /* Azul do macacão do Mario */
+            --mario-buttons: #FBDD00;   /* Amarelo dos botões */
+            --background-blue: #5B8DE5; /* Azul do céu */
+            --brick-yellow: #F8B800;    /* Amarelo dos tijolos */
+            --brick-brown: #B86D50;     /* Marrom dos tijolos */
+            --pipe-green: #00A74F;      /* Verde dos canos */
+            --pipe-dark-green: #007C3F; /* Verde escuro dos canos */
+            --white: #FFFFFF;
+            --black: #000000;
+            --text-dark: #402D23;
+            --goomba-brown: #8C634A;
+            --coin-gold: #F8C000;
+            --mushroom-red: #E52521;
+            --mushroom-white: #F8F0C0;
+        }
+
+        /* --- Estilos Gerais --- */
+        body {
+            font-family: 'Press Start 2P', cursive;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-blue);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, #6C9AEF 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, #6C9AEF 0%, transparent 25%);
+            animation: fadeInBackground 2s ease-in-out;
+        }
+
+        @keyframes fadeInBackground {
+            from { background-color: #f0f8ff; opacity: 0.5; }
+            to { background-color: var(--background-blue); opacity: 1; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            flex-grow: 1;
+        }
+
+        /* --- Cabeçalho --- */
+        header {
+            background: linear-gradient(135deg, var(--mario-red) 0%, #C81D17 100%);
+            color: var(--white);
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 8px solid var(--brick-brown);
+        }
+
+        header h1 {
+            font-family: 'Righteous', cursive;
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 3px;
+            text-shadow: 4px 4px 0 var(--black), 6px 6px 0 rgba(0,0,0,0.3);
+            animation: pulseTitle 2s infinite alternate;
+            color: var(--white);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulseTitle {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+
+        header p {
+            font-size: 1.1em;
+            margin-top: 10px;
+            text-shadow: 2px 2px 0 var(--black);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Elementos animados no header */
+        .header-element {
+            position: absolute;
+            bottom: 10px;
+            animation: floatElement 4s ease-in-out infinite;
+            opacity: 0.9;
+            filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.5));
+        }
+
+        .header-element.star {
+            left: 15%;
+            width: 40px;
+            animation-delay: 0.5s;
+        }
+
+        .header-element.coin {
+            left: 50%;
+            width: 35px;
+            animation-delay: 1s;
+            animation-duration: 3s;
+        }
+
+        .header-element.mushroom {
+            right: 15%;
+            width: 45px;
+            animation-delay: 0.8s;
+            animation-duration: 5s;
+        }
+
+        @keyframes floatElement {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(15deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+
+        /* Padrão de tijolos no cabeçalho */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(to bottom, transparent 95%, rgba(0,0,0,0.1) 100%),
+                repeating-linear-gradient(
+                    45deg,
+                    transparent,
+                    transparent 20px,
+                    rgba(0,0,0,0.1) 20px,
+                    rgba(0,0,0,0.1) 22px
+                );
+            z-index: 1;
+        }
+
+        /* --- Navegação --- */
+        nav {
+            background: linear-gradient(to bottom, var(--brick-yellow), var(--brick-brown));
+            padding: 15px 0;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 5px solid var(--mario-red);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        nav li {
+            display: inline-block;
+        }
+
+        nav a {
+            font-family: 'Righteous', cursive;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.2em;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease-out;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 2px 2px 0 var(--black);
+            background-color: var(--mario-red);
+            border: 2px solid var(--white);
+            box-shadow: 0 4px 0 var(--black);
+        }
+
+        nav a::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--mario-overall);
+            transform: scaleX(0);
+            transition: transform 0.3s ease-out;
+            transform-origin: left;
+        }
+
+        nav a:hover {
+            color: var(--white);
+            background-color: var(--mario-overall);
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 var(--black);
+        }
+
+        nav a:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* --- Conteúdo Principal --- */
+        main {
+            padding: 40px 0;
+        }
+
+        section {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+            border: 4px solid var(--mario-red);
+            animation: slideInFromLeft 1s ease-out forwards;
+            opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(90deg, 
+                var(--mario-red), var(--mario-overall), var(--mario-buttons), var(--mario-red));
+            z-index: 1;
+        }
+
+        section:nth-of-type(even) {
+            border-color: var(--mario-overall);
+        }
+
+        section:nth-of-type(even)::before {
+            background: linear-gradient(90deg, 
+                var(--mario-overall), var(--mario-buttons), var(--mario-red), var(--mario-overall));
+        }
+
+        section:nth-of-type(odd) {
+            animation-name: slideInFromLeft;
+        }
+
+        section:nth-of-type(even) {
+            animation-name: slideInFromRight;
+        }
+
+        @keyframes slideInFromLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes slideInFromRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        h2 {
+            font-family: 'Righteous', cursive;
+            color: var(--mario-red);
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: center;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+            width: 100%;
+            text-shadow: 2px 2px 0 var(--mario-overall);
+        }
+
+        section:nth-of-type(even) h2 {
+            color: var(--mario-overall);
+            text-shadow: 2px 2px 0 var(--mario-red);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--mario-buttons),
+                var(--mario-buttons) 10px,
+                var(--mario-red) 10px,
+                var(--mario-red) 20px
+            );
+            background-size: 28px 28px;
+            animation: moveWaves 2s linear infinite;
+        }
+
+        section:nth-of-type(even) h2::after {
+            background: repeating-linear-gradient(
+                -45deg,
+                var(--mario-red),
+                var(--mario-red) 10px,
+                var(--mario-buttons) 10px,
+                var(--mario-buttons) 20px
+            );
+        }
+
+        @keyframes moveWaves {
+            from { background-position: 0 0; }
+            to { background-position: 40px 0; }
+        }
+
+        article {
+            background-color: var(--white);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            border: 2px dashed var(--goomba-brown);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        article::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--mario-buttons), transparent);
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        article h3 {
+            font-size: 1.5em;
+            color: var(--mario-red);
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 0 var(--mario-overall);
+        }
+
+        /* --- Elementos Específicos do Jogo --- */
+        .power-up-block {
+            background: linear-gradient(135deg, var(--brick-yellow) 0%, var(--brick-brown) 100%);
+            color: var(--white);
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 4px solid var(--mario-red);
+            text-align: center;
+            font-size: 1.1em;
+            margin: 25px auto;
+            max-width: 400px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 5px 0 var(--black);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            top: 0;
+            text-shadow: 1px 1px 0 var(--black);
+        }
+
+        .power-up-block:active {
+            top: 5px;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 0 0 var(--black);
+        }
+
+        .pipe {
+            background: linear-gradient(to right, var(--pipe-green), var(--pipe-dark-green));
+            color: var(--white);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px 5px 0 0;
+            font-size: 1.1em;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 0 var(--black);
+            text-shadow: 1px 1px 0 var(--black);
+            border: 2px solid var(--black);
+        }
+
+        .pipe::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 20px;
+            background: linear-gradient(to right, var(--pipe-green), var(--pipe-dark-green));
+            border-radius: 5px 5px 0 0;
+            border: 3px solid var(--black);
+        }
+
+        /* --- Aside --- */
+        aside {
+            background: linear-gradient(135deg, var(--mario-overall) 0%, #3A9CAB 100%);
+            color: var(--white);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
+            margin-top: 30px;
+            border: 3px dashed var(--mario-red);
+            position: relative;
+        }
+
+        aside::before {
+            content: "💚";
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            background: var(--white);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--mario-red);
+        }
+
+        aside h3 {
+            font-family: 'Righteous', cursive;
+            font-size: 1.8em;
+            margin-top: 0;
+            color: var(--white);
+            text-shadow: 2px 2px 0 var(--black);
+        }
+
+        /* --- Rodapé --- */
+        footer {
+            background: linear-gradient(135deg, var(--pipe-dark-green) 0%, var(--pipe-green) 100%);
+            color: var(--coin-gold);
+            text-align: center;
+            padding: 20px 0;
+            margin-top: auto;
+            font-size: 0.9em;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.3);
+            border-top: 6px solid var(--mario-red);
+            text-shadow: 1px 1px 0 var(--black);
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, 
+                var(--mario-red), var(--mario-overall), var(--mario-buttons), var(--mario-red));
+        }
+
+        footer p {
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        /* Melhorias para lista de personagens */
+        #personagens ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #personagens li {
+            padding: 8px 0;
+            border-bottom: 1px dotted var(--mario-overall);
+        }
+
+        #personagens li:last-child {
+            border-bottom: none;
+        }
+
+        /* Adicionando sprites aos personagens */
+        .icon-mario {
+            font-size: 1.5em;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
